@@ -1,0 +1,29 @@
+{
+  "prompt": "For each domain with base score and signals, adjust scores by -15..15, assign cluster labels, add risk notes, and set keep true only for high-confidence matches. Output JSON {decisions:[{domain,score_adjustment,cluster_label?,risk_notes?,keep}]}",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "decisions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "domain": {"type": "string"},
+            "score_adjustment": {"type": "integer"},
+            "cluster_label": {"type": "string"},
+            "risk_notes": {"type": "string"},
+            "keep": {"type": "boolean"}
+          },
+          "required": ["domain", "score_adjustment", "keep"]
+        }
+      }
+    },
+    "required": ["decisions"]
+  },
+  "example_input": {"candidates": [{"domain": "brandx-markets.com", "match_score": 72, "signals": {"gtm": ["GTM-XXXX"]}}]},
+  "example_output": {
+    "decisions": [
+      {"domain": "brandx-markets.com", "score_adjustment": 7, "cluster_label": "BrandX Retail", "risk_notes": "Multiple strong signals; NS non-generic.", "keep": true}
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "prompt": "Given seed asset paths and candidate asset names, infer likely equivalents considering versioning, minification, and hashes. Output JSON {equivalences:[{seed,candidate,confidence}]}",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "equivalences": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "seed": {"type": "string"},
+            "candidate": {"type": "string"},
+            "confidence": {"type": "number"}
+          },
+          "required": ["seed", "candidate", "confidence"]
+        }
+      }
+    },
+    "required": ["equivalences"]
+  },
+  "example_input": {"seed": ["/js/core-v2.js"], "candidates": ["/static/js/core-2.min.js"]},
+  "example_output": {
+    "equivalences": [
+      {"seed": "/js/core-v2.js", "candidate": "/static/js/core-2.min.js", "confidence": 0.86}
+    ]
+  }
+}
