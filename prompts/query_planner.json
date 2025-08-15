@@ -1,0 +1,20 @@
+{
+  "prompt": "Given fingerprint data and optional keywords, produce precise web search queries that help find sibling domains. Output strict JSON with fields {queries[], max_results_per_query, ban_domains[], must_exclude[]}",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "queries": {"type": "array", "items": {"type": "object", "properties": {"q": {"type": "string"}, "hints": {"type": "array", "items": {"type": "string"}}}, "required": ["q"]}},
+      "max_results_per_query": {"type": "integer"},
+      "ban_domains": {"type": "array", "items": {"type": "string"}},
+      "must_exclude": {"type": "array", "items": {"type": "string"}}
+    },
+    "required": ["queries", "max_results_per_query"]
+  },
+  "example_input": {"fingerprint": {"gtm_ids": ["GTM-XXXX"]}, "keywords": ["crm"]},
+  "example_output": {
+    "queries": [{"q": "\"GTM-XXXX\"", "hints": ["ids"]}],
+    "max_results_per_query": 30,
+    "ban_domains": ["github.com"],
+    "must_exclude": ["example.com"]
+  }
+}

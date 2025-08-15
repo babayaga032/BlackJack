@@ -1,0 +1,27 @@
+{
+  "prompt": "Compare seed DOM motifs and candidate snippets to identify near-duplicate phrases or namespaces. Return JSON {soft_signals:[{signal,delta,reason}]} with |delta| <= 10",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "soft_signals": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "signal": {"type": "string"},
+            "delta": {"type": "integer"},
+            "reason": {"type": "string"}
+          },
+          "required": ["signal", "delta", "reason"]
+        }
+      }
+    },
+    "required": ["soft_signals"]
+  },
+  "example_input": {"seed_footer": "© BrandX, Inc.", "candidate_footer": "© BrandX LLC"},
+  "example_output": {
+    "soft_signals": [
+      {"signal": "footer_phrase_variant", "delta": 6, "reason": "© BrandX LLC vs © BrandX, Inc."}
+    ]
+  }
+}
